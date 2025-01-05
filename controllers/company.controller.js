@@ -1,20 +1,16 @@
-
 import {Company} from "../models/company.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
-
-
 export const registerCompany = async(req,res)=>{
     try{
-       const {companyName} = req.body;
-       if(!companyName){
+       const {name} = req.body;
+       if(!name){
         return res.status(400).json({
             message:"Company name is required",
             success:false
         });
        }
-
-       let company = await Company.findOne({name:companyName});
+       let company = await Company.findOne({name:name});
        if(company){
         return res.status(400).json({
             message:"you can't register same company",
@@ -22,7 +18,7 @@ export const registerCompany = async(req,res)=>{
         })
        };
      company= await Company.create({
-        name:companyName,
+        name:name,
         userId:req.id
      })
 
