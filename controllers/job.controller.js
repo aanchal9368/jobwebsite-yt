@@ -67,7 +67,7 @@ export const getJobById = async(req,res)=>{
      const job = await Job.findById(jobId).populate({
       path:"applications"
      });
-     if(!job){
+     if(!job){ 
       return res.status(404).json({
         message:"Job not found",
         success:false
